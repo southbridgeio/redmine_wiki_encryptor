@@ -3,8 +3,8 @@ require_dependency "wiki_content"
 module WikiContentVersionPatch
 
   def self.included(base)
+    base.send(:include, InstanceMethods)
     unless WikiEncryptor::Configuration.key.nil?
-      base.send(:include, InstanceMethods)
       base.class_eval do
         alias_method_chain :text=, :encryption
         alias_method_chain :text, :encryption
