@@ -1,0 +1,1 @@
+gem 'attr_encrypted'
