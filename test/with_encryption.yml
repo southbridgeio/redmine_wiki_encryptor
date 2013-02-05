@@ -1,0 +1,4 @@
+test:
+  wiki_encryptor:
+    key: '123'
+    algorithm: 'des-ede-cbc'
