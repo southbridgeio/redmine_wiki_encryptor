@@ -22,11 +22,11 @@ rake redmine:plugins:migrate
 ```
 
 5. Add key (and optionally algorithm) to configuration.yml
-```yml
-production:
-  wiki_encryptor:
-    key: 'mega-secret-key'
-    algorithm: 'des-ede-cbc'
+```yaml
+    production:
+      wiki_encryptor:
+        key: 'mega-secret-key'
+        algorithm: 'des-ede-cbc'
 ```
 
 6. Encrypt existing wiki pages
