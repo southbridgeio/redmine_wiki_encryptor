@@ -9,3 +9,4 @@ Redmine::Configuration.load(
 # Patches depends on configuration, so just reload them.
 load File.expand_path(File.dirname(__FILE__) + '/../lib/wiki_content_patch.rb')
 load File.expand_path(File.dirname(__FILE__) + '/../lib/wiki_content_version_patch.rb')
+load File.expand_path(File.dirname(__FILE__) + '/../lib/wiki_page_patch.rb')

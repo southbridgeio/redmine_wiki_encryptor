@@ -76,3 +76,6 @@ Plugin does not encrypt without key in configuration.
 
 Plugin uses gem [attr_encryptor](https://github.com/shuber/attr_encrypted). Available encryption algorithms look there.
 Default algorithm is **aes-256-cbc**
+
+Plugin replaces search for text in wiki pages with own implementation, which can be very inefficient and slow on large amount of pages.
+Except: search with 'titles only' option uses native implementation.
