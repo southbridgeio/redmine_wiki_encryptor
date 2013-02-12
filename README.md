@@ -2,6 +2,13 @@
 
 Plugin encrypts wiki in database. Plugin compatible with Redmine 2.0.x, 2.1.x, 2.2.x
 
+## WARNING
+
+All **rake** commands must be run with correct **RAILS_ENV** variable, e.g.
+```
+RAILS_ENV=production rake redmine:plugins:migrate
+```
+
 ## Installation
 
 1. Stop redmine
@@ -26,7 +33,7 @@ rake redmine:plugins:migrate
     production:
       wiki_encryptor:
         key: 'mega-secret-key'
-        algorithm: 'des-ede-cbc'
+        algorithm: 'des'
 ```
 
 6. Encrypt existing wiki pages
@@ -79,3 +86,7 @@ Default algorithm is **aes-256-cbc**
 
 Plugin replaces search for text in wiki pages with own implementation, which can be very inefficient and slow on large amount of pages.
 Except: search with 'titles only' option uses native implementation.
+
+## Sponsors
+
+Work on this plugin was fully funded by [centos-admin.ru](http://centos-admin.ru)
