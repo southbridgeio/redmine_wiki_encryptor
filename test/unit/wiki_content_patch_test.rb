@@ -22,4 +22,11 @@ class WikiContentPatchTest < ActiveSupport::TestCase
     loaded_content = WikiContent.find(content.id)
     assert loaded_content.text == "Hello world!"
   end
+
+  def test_disable_cache_setting_after_initialize
+    content = WikiContent.create(page: @page, text: "Hello world!")
+    Setting['cache_formatted_text'] = 1
+    content.reload
+    assert Setting['cache_formatted_text'] == '0'
+  end
 end

@@ -87,6 +87,8 @@ Default algorithm is **aes-256-cbc**
 Plugin replaces search for text in wiki pages with own implementation, which can be very inefficient and slow on large amount of pages.
 Except: search with 'titles only' option uses native implementation.
 
+Plugin disables 'cache formatted text' setting forced.
+
 ## Sponsors
 
 Work on this plugin was fully funded by [centos-admin.ru](http://centos-admin.ru)

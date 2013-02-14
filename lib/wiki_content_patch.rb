@@ -1,4 +1,5 @@
 require_dependency "wiki_content"
+require_dependency "setting"
 
 module WikiContentPatch
 
@@ -6,6 +7,7 @@ module WikiContentPatch
     unless WikiEncryptor::Configuration.key.nil?
       base.send(:attr_encrypted, :text, key: WikiEncryptor::Configuration.key, algorithm: WikiEncryptor::Configuration.algorithm)
       base.send(:include, InstanceMethods)
+      base.send(:after_initialize, :disable_cache_formatted_text)
     end
   end
 
@@ -13,6 +15,12 @@ module WikiContentPatch
 
     def text_changed?
       encrypted_text_changed?
+    end
+
+    private
+
+    def disable_cache_formatted_text
+      Setting['cache_formatted_text'] = 0
     end
 
   end
