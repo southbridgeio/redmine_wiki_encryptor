@@ -4,7 +4,7 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   description 'Plugin encrypts wiki content in database'
   version '0.0.2'
   url 'https://github.com/olemskoi/redmine_wiki_encryptor'
-  author_url 'https://github.com/kanfet'
+  author_url 'http://centos-admin.ru'
 end
 
 ActionDispatch::Callbacks.to_prepare do
