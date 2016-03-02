@@ -1,1 +1,1 @@
-gem 'attr_encrypted'
+gem 'attr_encrypted', '~> 1.4'
