@@ -79,7 +79,15 @@ rake redmine:plugins:migrate VERSION=0 NAME=redmine_wiki_encryptor
 
 ## Notes
 
-Plugin does not encrypt without key in configuration.
+Key must be present in configuration file to make the plugin work. However it's possible to secure the key using the following method:
+```
+#!/bin/bash
+echo -n "Password: "; read password;
+sed -i "s/    key: /    key: '$password'/g" /opt/redmine/config/configuration.yml
+cd /opt/redmine && /opt/redmine/bin/bundle exec unicorn -D -E production -c config/unicorn.rb
+sed -i "s/    key: '$password'/    key: /g" /opt/redmine/config/configuration.yml
+```
+The script above reads password from standard input, puts it to the configuration file, starts Redmine, then removes the password.
 
 Plugin uses gem [attr_encrypted](https://github.com/shuber/attr_encrypted). Available encryption algorithms look there.
 Default algorithm is **aes-256-cbc**
