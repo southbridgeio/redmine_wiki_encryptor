@@ -79,7 +79,7 @@ rake redmine:plugins:migrate VERSION=0 NAME=redmine_wiki_encryptor
 
 ## Notes
 
-Password must be present in configuration file to make the plugin work. However it's possible to secure the key using the following method:
+Password must be present in configuration file so Redmine could start. However it's possible to secure the key using the following method:
 ```
 #!/bin/bash
 echo -n "Password: "; read password;
