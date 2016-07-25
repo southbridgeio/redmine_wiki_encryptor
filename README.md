@@ -1,12 +1,12 @@
 # Redmine Wiki Encryptor
 
-Plugin encrypts wiki in database. Plugin compatible with Redmine 2.0.x, 2.1.x, 2.2.x
+Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redmine 2.0.x and later.
 
 ## WARNING
 
 All **rake** commands must be run with correct **RAILS_ENV** variable, e.g.
 ```
-RAILS_ENV=production rake redmine:plugins:migrate
+RAILS_ENV=production bundle exec rake redmine:plugins:migrate
 ```
 
 ## Installation
@@ -25,7 +25,7 @@ bundle install
 
 4. Run migration
 ```
-rake redmine:plugins:migrate
+bundle exec rake redmine:plugins:migrate
 ```
 
 5. Add key (and optionally algorithm) to configuration.yml
@@ -38,7 +38,7 @@ rake redmine:plugins:migrate
 
 6. Encrypt existing wiki pages
 ```
-rake wiki_encryptor:encrypt
+bundle exec rake wiki_encryptor:encrypt
 ```
 
 7. Start redmine
@@ -49,14 +49,14 @@ rake wiki_encryptor:encrypt
 
 2. Decrypt wiki pages
 ```
-rake wiki_encryptor:decrypt
+bundle exec rake wiki_encryptor:decrypt
 ```
 
 3. Change key and/or algorithm in configuration.yml
 
 4. Encrypt existing wiki pages
 ```
-rake wiki_encryptor:encrypt
+bundle exec rake wiki_encryptor:encrypt
 ```
 
 ## Uninstallation
@@ -65,14 +65,14 @@ rake wiki_encryptor:encrypt
 
 2. Decrypt wiki pages
 ```
-rake wiki_encryptor:decrypt
+bundle exec rake wiki_encryptor:decrypt
 ```
 
 3. Remove 'wiki_encryptor' section from configuration.yml
 
 4. Rollback migration
 ```
-rake redmine:plugins:migrate VERSION=0 NAME=redmine_wiki_encryptor
+bundle exec rake redmine:plugins:migrate VERSION=0 NAME=redmine_wiki_encryptor
 ```
 
 5. Remove plugin directory from your redmine/plugins directory
@@ -99,4 +99,4 @@ Plugin disables 'cache formatted text' setting forced.
 
 ## Sponsors
 
-Work on this plugin was fully funded by [centos-admin.ru](http://centos-admin.ru)
+Work on this plugin was fully funded by [centos-admin.ru](https://centos-admin.ru)
