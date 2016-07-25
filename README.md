@@ -15,7 +15,7 @@ RAILS_ENV=production rake redmine:plugins:migrate
 
 2. Clone repository to your redmine/plugins directory
 ```
-git clone git://github.com/olemskoi/redmine_wiki_encryptor.git
+git clone git://github.com/centosadmin/redmine_wiki_encryptor.git
 ```
 
 3. Install dependencies
