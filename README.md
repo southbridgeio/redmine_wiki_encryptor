@@ -28,7 +28,7 @@ bundle install
 bundle exec rake redmine:plugins:migrate
 ```
 
-5. Add key (and optionally algorithm) to configuration.yml
+5. Add key (and algorithm optionally) to configuration.yml
 ```yaml
     production:
       wiki_encryptor:
@@ -79,7 +79,7 @@ bundle exec rake redmine:plugins:migrate VERSION=0 NAME=redmine_wiki_encryptor
 
 ## Notes
 
-Password must be present in configuration file so Redmine could start. However it's possible to secure the key using the following method:
+Password must be present in configuration file so Redmine can start. However it's possible to secure the key using the following method:
 ```
 #!/bin/bash
 echo -n "Password: "; read password;
@@ -87,7 +87,7 @@ sed -i "s/    key: /    key: '$password'/g" /opt/redmine/config/configuration.ym
 cd /opt/redmine && /opt/redmine/bin/bundle exec unicorn -D -E production -c config/unicorn.rb
 sed -i "s/    key: '$password'/    key: /g" /opt/redmine/config/configuration.yml
 ```
-The script above reads password from standard input, puts it to the configuration file, starts Redmine, then removes the password.
+The script above reads the password from standard input, puts it to the configuration file, starts Redmine, then removes the password.
 
 Plugin uses gem [attr_encrypted](https://github.com/shuber/attr_encrypted). Available encryption algorithms look there.
 Default algorithm is **aes-256-cbc**
