@@ -10,7 +10,9 @@ module WikiPagePatch
 
   module ClassMethods
 
-    def search(tokens, projects=nil, options={})
+    #   WikiPage.search_result_ranks_and_ids("foo")
+    #   # => [[1419595329, 69], [1419595622, 123]]
+    def search_result_ranks_and_ids(tokens, user=User.current, projects=nil, options={})
       if options[:titles_only]
         # Use default sql search
         super
@@ -19,31 +21,20 @@ module WikiPagePatch
 
         if projects.is_a?(Array) && projects.empty?
           # no results
-          return [[], 0]
+          return none
         end
 
-        user = User.current
         tokens = [] << tokens unless tokens.is_a?(Array)
         projects = [] << projects unless projects.nil? || projects.is_a?(Array)
 
-        scope = self.scoped
-        project_conditions = []
-        if searchable_options.has_key?(:permission)
-          project_conditions << Project.allowed_to_condition(user, searchable_options[:permission] || :view_project)
-        elsif respond_to?(:visible)
-          scope = scope.visible(user)
-        else
-          ActiveSupport::Deprecation.warn "acts_as_searchable with implicit :permission option is deprecated. Add a visible scope to the #{self.name} model or use explicit :permission option."
-          project_conditions << Project.allowed_to_condition(user, "view_#{self.name.underscore.pluralize}".to_sym)
+        scope = (searchable_options[:scope] || self)
+        permission = searchable_options[:permission] || :view_project
+        scope = scope.where(Project.allowed_to_condition(user, permission))
+
+        if projects
+          scope = scope.where("#{searchable_options[:project_key]} IN (?)", projects.map(&:id))
         end
-        project_conditions << "#{searchable_options[:project_key]} IN (#{projects.collect(&:id).join(',')})" unless projects.nil?
-        project_conditions = project_conditions.empty? ? nil : project_conditions.join(' AND ')
 
-        scope = scope.
-            includes(searchable_options[:include]).
-            where(project_conditions)
-
-        results_count = 0
         results_ids = []
         need_matches = options[:all_words] ? tokens.length : 1
 
@@ -57,18 +48,17 @@ module WikiPagePatch
           end
           if matches_count >= need_matches
             results_ids << wiki_page.id
-            results_count += 1
           end
         end
 
-        scope = scope.order("#{searchable_options[:order_column]} " + (options[:before] ? 'DESC' : 'ASC'))
-        scope_with_limit = scope.limit(options[:limit])
-        if options[:offset]
-          scope_with_limit = scope_with_limit.where("#{searchable_options[:date_column]} #{options[:before] ? '<' : '>'} ?", options[:offset])
-        end
-        result = scope_with_limit.where(id: results_ids).all
-
-        [result, results_count]
+        scope.
+          where(id: results_ids).
+          reorder(searchable_options[:date_column] => :desc, :id => :desc).
+          limit(options[:limit]).
+          distinct.
+          pluck(searchable_options[:date_column], :id).
+          # converts timestamps to integers for faster sort
+          map {|timestamp, id| [timestamp.to_i, id]}
       end
     end
 
