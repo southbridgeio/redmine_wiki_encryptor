@@ -25,9 +25,12 @@ module WikiPagePatch
         end
 
         tokens = [] << tokens unless tokens.is_a?(Array)
-        projects = [] << projects unless projects.nil? || projects.is_a?(Array)
+        projects = [] << projects if projects.is_a?(Project)
 
         scope = (searchable_options[:scope] || self)
+        if scope.is_a? Proc
+          scope = scope.call(options)
+        end
         permission = searchable_options[:permission] || :view_project
         scope = scope.where(Project.allowed_to_condition(user, permission))
 
