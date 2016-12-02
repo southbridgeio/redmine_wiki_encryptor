@@ -6,9 +6,18 @@ module WikiPagePatch
     unless WikiEncryptor::Configuration.key.nil?
       base.extend ClassMethods
     end
+    base.class_eval do
+      # Same as typing in the class.
+      unloadable # Send unloadable so it will not be unloaded in development.
+      safe_attributes 'not_index'
+    end
   end
 
   module ClassMethods
+
+    def not_index
+      true
+    end
 
     #   WikiPage.search_result_ranks_and_ids("foo")
     #   # => [[1419595329, 69], [1419595622, 123]]

@@ -1,0 +1,4 @@
+<% class_link = page.not_index ? "icon icon-zoom-out not_index_wiki_page indexable" : "icon icon-zoom-in indexable" %>
+<% lable_link = page.not_index ? l(:not_index_wiki_page) : l(:index_wiki_page) %>
+
+<%= link_to lable_link, "/projects/#{project.id}/wiki/#{page.title}/change_not_index", method: :post, remote:true, class: class_link %>

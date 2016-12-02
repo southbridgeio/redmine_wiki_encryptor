@@ -1,0 +1,11 @@
+<%- if @page && @page.kind_of?(WikiPage) && User.current.allowed_to?({:controller => 'wiki', :action => 'edit'}, @project) %>
+  <%= stylesheet_link_tag 'redmine_wiki_encryptor', :plugin => 'redmine_wiki_encryptor' %>
+  <script type="text/javascript">
+    $(document).ready(function($) {
+      if($(".wiki-page").length > 0) {
+        var newLink = $('');
+        $($("#content .contextual")[0]).prepend('<%= j render 'redmine_wiki_encryptor/link_indexable', page: @page, project: @project %>');
+      }
+    });
+  </script>
+<%- end %>

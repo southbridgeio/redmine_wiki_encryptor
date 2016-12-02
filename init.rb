@@ -9,6 +9,7 @@ end
 
 ActionDispatch::Callbacks.to_prepare do
   require "wiki_encryptor"
+  require "redmine_wiki_encryptor/hooks.rb"
   require_dependency 'wiki_content_patch'
   require_dependency 'wiki_content_version_patch'
   require_dependency 'wiki_page_patch'
