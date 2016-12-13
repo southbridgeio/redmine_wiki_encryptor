@@ -5,6 +5,12 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   version '0.0.4'
   url 'https://github.com/centosadmin/redmine_wiki_encryptor'
   author_url 'https://centos-admin.ru'
+
+  Redmine::AccessControl.map do |map|
+    map.project_module :wiki do |map|
+      map.permission :edit_indexable, {:redmine_wiki_encryptor => [:change_not_index]}
+    end
+  end
 end
 
 ActionDispatch::Callbacks.to_prepare do

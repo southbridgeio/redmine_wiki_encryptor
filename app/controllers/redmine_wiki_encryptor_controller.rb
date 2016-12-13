@@ -1,7 +1,7 @@
 class RedmineWikiEncryptorController < ApplicationController
   unloadable
 
-  before_filter :find_page, :check_authorize
+  before_filter :find_page, :authorize
 
   respond_to :js
 
@@ -12,10 +12,6 @@ class RedmineWikiEncryptorController < ApplicationController
   end
 
   private
-
-  def check_authorize
-     User.current.allowed_to?({:controller => 'wiki', :action => 'edit'}, @project)
-  end
 
   def find_page
     @project = Project.find(params[:project_id])

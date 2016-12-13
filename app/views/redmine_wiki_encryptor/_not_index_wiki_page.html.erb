@@ -1,4 +1,4 @@
-<%- if @page && @page.kind_of?(WikiPage) && User.current.allowed_to?({:controller => 'wiki', :action => 'edit'}, @project) %>
+<%- if @page && @page.kind_of?(WikiPage) && User.current.allowed_to?(:edit_indexable, @project) %>
   <%= stylesheet_link_tag 'redmine_wiki_encryptor', :plugin => 'redmine_wiki_encryptor' %>
   <script type="text/javascript">
     $(document).ready(function($) {

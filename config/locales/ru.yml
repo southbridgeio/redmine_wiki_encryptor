@@ -1,4 +1,5 @@
 # Russian strings go here for Rails i18n
 ru:
+  permission_edit_indexable: 'Управление индексированием'
   index_wiki_page: 'Индексируется'
   not_index_wiki_page: 'Не индексируется'
