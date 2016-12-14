@@ -81,6 +81,12 @@ Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redm
 
 5. Remove plugin directory from your redmine/plugins directory
 
+## Fulltext search
+
+For plugin [redmine_elasticsearch](https://github.com/centosadmin/redmine_elasticsearch) can delete wiki page from index. Mark switch as not indexing.
+
+Add permission for role: Administration -> Roles and permissions ->  Manager -> Wiki -> Edit indexable
+
 ## Notes
 
 Password must be present in configuration file so Redmine can start. However it's possible to secure the key using the following method:
