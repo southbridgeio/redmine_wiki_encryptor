@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   name 'Redmine Wiki Encryptor plugin'
   author 'Pavel Nemkin'
   description 'Plugin encrypts wiki content in database'
-  version '0.0.4'
+  version '0.0.5'
   url 'https://github.com/centosadmin/redmine_wiki_encryptor'
   author_url 'https://centos-admin.ru'
 
