@@ -1,7 +1,7 @@
 class RedmineWikiEncryptorController < ApplicationController
   unloadable
 
-  before_filter :find_page, :authorize
+  before_action :find_page, :authorize
 
   respond_to :js
 

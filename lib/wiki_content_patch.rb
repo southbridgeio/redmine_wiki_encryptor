@@ -5,7 +5,11 @@ module WikiContentPatch
 
   def self.included(base)
     unless WikiEncryptor::Configuration.key.nil?
-      base.send(:attr_encrypted, :text, key: WikiEncryptor::Configuration.key, algorithm: WikiEncryptor::Configuration.algorithm)
+      base.send(:attr_encrypted, :text,
+                key: WikiEncryptor::Configuration.key,
+                algorithm: WikiEncryptor::Configuration.algorithm,
+                mode: :single_iv_and_salt,
+                insecure_mode: true)
       base.send(:include, InstanceMethods)
       base.send(:after_initialize, :disable_cache_formatted_text)
     end

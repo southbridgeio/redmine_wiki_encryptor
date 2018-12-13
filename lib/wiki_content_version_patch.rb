@@ -6,8 +6,11 @@ module WikiContentVersionPatch
     base.send(:include, InstanceMethods)
     unless WikiEncryptor::Configuration.key.nil?
       base.class_eval do
-        alias_method_chain :text=, :encryption
-        alias_method_chain :text, :encryption
+        alias_method :text_without_encryption, :text
+        alias_method :text, :text_with_encryption
+
+        alias_method :text_without_encryption=, :text=
+        alias_method :text=, :text_with_encryption=
       end
     end
   end

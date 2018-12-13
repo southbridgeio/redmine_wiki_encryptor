@@ -13,7 +13,8 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   end
 end
 
-ActionDispatch::Callbacks.to_prepare do
+reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
+reloader.to_prepare do
   require "wiki_encryptor"
   require "redmine_wiki_encryptor/hooks.rb"
   require_dependency 'wiki_content_patch'
