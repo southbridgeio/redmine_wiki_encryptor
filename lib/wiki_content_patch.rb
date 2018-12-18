@@ -10,13 +10,12 @@ module WikiContentPatch
                 algorithm: WikiEncryptor::Configuration.algorithm,
                 mode: :single_iv_and_salt,
                 insecure_mode: true)
-      base.send(:include, InstanceMethods)
+      base.send(:prepend, InstanceMethods)
       base.send(:after_initialize, :disable_cache_formatted_text)
     end
   end
 
   module InstanceMethods
-
     def text_changed?
       encrypted_text_changed?
     end
@@ -27,8 +26,12 @@ module WikiContentPatch
       Setting['cache_formatted_text'] = 0
     end
 
+    def create_version
+      version =  WikiContentVersion.new(attributes.except("id"))
+      version.text = text
+      versions << version
+    end
   end
-
 end
 
 WikiContent.send(:include, WikiContentPatch)
