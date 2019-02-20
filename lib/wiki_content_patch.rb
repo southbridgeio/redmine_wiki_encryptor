@@ -7,9 +7,7 @@ module WikiContentPatch
     unless WikiEncryptor::Configuration.key.nil?
       base.send(:attr_encrypted, :text,
                 key: WikiEncryptor::Configuration.key,
-                algorithm: WikiEncryptor::Configuration.algorithm,
-                mode: :single_iv_and_salt,
-                insecure_mode: true)
+                algorithm: WikiEncryptor::Configuration.algorithm)
       base.send(:prepend, InstanceMethods)
       base.send(:after_initialize, :disable_cache_formatted_text)
     end
@@ -27,7 +25,7 @@ module WikiContentPatch
     end
 
     def create_version
-      version =  WikiContentVersion.new(attributes.except("id"))
+      version =  WikiContentVersion.new(attributes.except('id', 'text' 'encrypted_text_iv', 'encrypted_text'))
       version.text = text
       versions << version
     end
