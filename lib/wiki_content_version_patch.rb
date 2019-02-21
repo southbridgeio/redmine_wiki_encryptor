@@ -21,6 +21,10 @@ module WikiContentVersionPatch
       # stub for act_as_versioned
     end
 
+    def encrypted_text_iv=(value)
+      # stub for act_as_versioned
+    end
+
     def text_with_encryption=(value)
       encrypted = WikiContent.encrypt_text(value, iv: iv)
       self.text_without_encryption = "#{encrypted}:#{[iv].pack('m')}"
