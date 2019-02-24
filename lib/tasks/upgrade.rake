@@ -55,6 +55,8 @@ namespace :wiki_encryptor do
     ActiveRecord::Base.record_timestamps = false
 
     LegacyWikiContent.find_each do |legacy_content|
+      next if legacy_content.encrypted_text_iv.present?
+
       ActiveRecord::Base.transaction do
         puts "Reencrypting wiki content ##{legacy_content.id}..."
         content = WikiContent.find(legacy_content.id)
