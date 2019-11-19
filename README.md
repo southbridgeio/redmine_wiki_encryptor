@@ -124,4 +124,4 @@ contributors](https://github.com/southbridgeio/redmine_wiki_encryptor/graphs/con
 
 ## Author
 
-Developed by [Centos-admin.ru](https://southbridge.io).
+Developed by [Southbridge](https://southbridge.io).
