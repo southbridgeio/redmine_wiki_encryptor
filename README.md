@@ -1,4 +1,4 @@
-# Redmine Wiki Encryptor [![Build Status](https://travis-ci.org/centosadmin/redmine_wiki_encryptor.svg?branch=master)](https://travis-ci.org/centosadmin/redmine_wiki_encryptor) [![Code Climate](https://codeclimate.com/github/centosadmin/redmine_wiki_encryptor/badges/gpa.svg)](https://codeclimate.com/github/centosadmin/redmine_wiki_encryptor) [![Rate at redmine.org](http://img.shields.io/badge/rate%20at-redmine.org-blue.svg?style=flat)](http://www.redmine.org/plugins/redmine_wiki_encryptor)
+# Redmine Wiki Encryptor [![Build Status](https://travis-ci.org/southbridgeio/redmine_wiki_encryptor.svg?branch=master)](https://travis-ci.org/southbridgeio/redmine_wiki_encryptor) [![Code Climate](https://codeclimate.com/github/southbridgeio/redmine_wiki_encryptor/badges/gpa.svg)](https://codeclimate.com/github/southbridgeio/redmine_wiki_encryptor) [![Rate at redmine.org](http://img.shields.io/badge/rate%20at-redmine.org-blue.svg?style=flat)](http://www.redmine.org/plugins/redmine_wiki_encryptor)
 
 Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redmine 3.0 and later.
 
@@ -6,10 +6,10 @@ Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redm
 
 1. Stop redmine
 
-2. Clone the [repository from GitHub](https://github.com/centosadmin/redmine_wiki_encryptor) to your redmine/plugins directory:
+2. Clone the [repository from GitHub](https://github.com/southbridgeio/redmine_wiki_encryptor) to your redmine/plugins directory:
 
     ```
-    git clone git://github.com/centosadmin/redmine_wiki_encryptor.git
+    git clone git://github.com/southbridgeio/redmine_wiki_encryptor.git
     ```
 
 3. Install all dependencies with:
@@ -83,7 +83,7 @@ Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redm
 
 ## Fulltext search
 
-For plugin [redmine_elasticsearch](https://github.com/centosadmin/redmine_elasticsearch) can delete wiki page from index. Mark switch as not indexing.
+For plugin [redmine_elasticsearch](https://github.com/southbridgeio/redmine_elasticsearch) can delete wiki page from index. Mark switch as not indexing.
 
 Add permission for role: Administration -> Roles and permissions ->  Manager -> Wiki -> Edit indexable
 
@@ -120,8 +120,8 @@ Plugin disables 'cache formatted text' setting forced.
 ## Thanks
 
 Thanks to all our [awesome
-contributors](https://github.com/centosadmin/redmine_wiki_encryptor/graphs/contributors)
+contributors](https://github.com/southbridgeio/redmine_wiki_encryptor/graphs/contributors)
 
 ## Author
 
-Developed by [Centos-admin.ru](https://centos-admin.ru/).
+Developed by [Centos-admin.ru](https://southbridge.io).
