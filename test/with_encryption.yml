@@ -1,4 +1,4 @@
 test:
   wiki_encryptor:
-    key: '123'
+    key: '1234567890123456'
     algorithm: 'des-ede-cbc'

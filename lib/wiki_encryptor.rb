@@ -22,11 +22,13 @@ module WikiEncryptor
       WikiContent.find_each do |content|
         ActiveRecord::Base.transaction do
           unless content.attributes['text'].blank?
-            content.update_column(:encrypted_text, WikiContent.encrypt_text(content.attributes['text']))
-            content.update_column(:text, "")
+            content.text = content['text']
+            content.update_columns(text: '',
+                                   encrypted_text: content.encrypted_text,
+                                   encrypted_text_iv: content.encrypted_text_iv)
             content.versions.each do |content_version|
               content_version.text = content_version.text_without_encryption
-              content_version.save
+              content_version.update_column(:data, content_version.data)
             end
           end
           content_count += 1
@@ -44,11 +46,10 @@ module WikiEncryptor
       WikiContent.find_each do |content|
         ActiveRecord::Base.transaction do
           unless content.attributes['encrypted_text'].blank?
-            content.update_column(:text, WikiContent.decrypt_text(content.attributes['encrypted_text']))
-            content.update_column(:encrypted_text, "")
+            content.update_columns(text: content.text, encrypted_text: nil, encrypted_text_iv: nil)
             content.versions.each do |content_version|
               content_version.text_without_encryption = content_version.text
-              content_version.save
+              content_version.update_column(:data, content_version.data)
             end
           end
           content_count += 1
