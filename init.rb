@@ -8,16 +8,22 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
 
   Redmine::AccessControl.map do |map|
     map.project_module :wiki do |map|
-      map.permission :edit_indexable, {:redmine_wiki_encryptor => [:change_not_index]}
+      map.permission :edit_indexable, { :redmine_wiki_encryptor => [:change_not_index] }
     end
   end
 end
 
-reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
-reloader.to_prepare do
-  require "wiki_encryptor"
-  require "redmine_wiki_encryptor/hooks.rb"
-  require_dependency 'wiki_content_patch'
-  require_dependency 'wiki_content_version_patch'
-  require_dependency 'wiki_page_patch'
+register_after_redmine_initialize_proc =
+  if Redmine::VERSION::MAJOR >= 5
+    Rails.application.config.public_method(:after_initialize)
+  else
+    reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
+    reloader.public_method(:to_prepare)
+  end
+register_after_redmine_initialize_proc.call do
+  require File.dirname(__FILE__) + '/lib/wiki_encryptor'
+  require File.dirname(__FILE__) + '/lib/redmine_wiki_encryptor/hooks.rb'
+  require_dependency File.dirname(__FILE__) + '/lib/wiki_content_patch'
+  require_dependency File.dirname(__FILE__) + '/lib/wiki_content_version_patch'
+  require_dependency File.dirname(__FILE__) + '/lib/wiki_page_patch'
 end

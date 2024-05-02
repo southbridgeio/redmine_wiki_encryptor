@@ -15,7 +15,7 @@ class WikiEncryptorTest < ActiveSupport::TestCase
   def test_encrypts_existing_wiki_content_versions
     content_version = WikiContent.first.versions.first
     WikiEncryptor.encrypt
-    encrypted_version = WikiContent::Version.find(content_version.id)
+    encrypted_version = WikiContentVersion.find(content_version.id)
     assert encrypted_version.attributes['data'] != content_version.attributes['data']
   end
 

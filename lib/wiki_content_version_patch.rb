@@ -41,7 +41,6 @@ module WikiContentVersionPatch
       page.content.encrypted_text_iv.unpack('m').first
     end
   end
-
 end
 
-WikiContent::Version.send(:include, WikiContentVersionPatch)
+WikiContentVersion.send(:include, WikiContentVersionPatch)

@@ -25,7 +25,7 @@ module WikiContentPatch
     end
 
     def create_version
-      version =  WikiContent::Version.new(attributes.slice(*WikiContent::Version.attribute_names).except('id'))
+      version = WikiContentVersion.new(attributes.slice(*WikiContentVersion.attribute_names).except('id'))
       version.wiki_content_id = id
       version.text = text
       version.save!
