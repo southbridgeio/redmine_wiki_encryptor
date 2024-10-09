@@ -23,7 +23,7 @@ namespace :wiki_encryptor do
     end
 
     class LegacyWikiContentVersion < ActiveRecord::Base
-      self.table_name = WikiContent::Version.table_name
+      self.table_name = WikiContentVersion.table_name
 
       def text
         @text ||= begin
@@ -65,7 +65,7 @@ namespace :wiki_encryptor do
         content.update_columns(encrypted_text: content.encrypted_text, encrypted_text_iv: content.encrypted_text_iv)
 
         legacy_content.versions.each do |legacy_version|
-          version = WikiContent::Version.find(legacy_version.id)
+          version = WikiContentVersion.find(legacy_version.id)
           version.text = legacy_version.text
           version.save!
         end
