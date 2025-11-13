@@ -1,6 +1,7 @@
 # Redmine Wiki Encryptor [![Build Status](https://travis-ci.org/southbridgeio/redmine_wiki_encryptor.svg?branch=master)](https://travis-ci.org/southbridgeio/redmine_wiki_encryptor) [![Code Climate](https://codeclimate.com/github/southbridgeio/redmine_wiki_encryptor/badges/gpa.svg)](https://codeclimate.com/github/southbridgeio/redmine_wiki_encryptor) [![Rate at redmine.org](http://img.shields.io/badge/rate%20at-redmine.org-blue.svg?style=flat)](http://www.redmine.org/plugins/redmine_wiki_encryptor)
 
-Plugin encrypts wiki in database. redmine_wiki_encryptor is compatible with Redmine 3.0 and later.
+Plugin encrypts wiki in database. redmine_wiki_encryptor v0.1.0 is compatible with Redmine 5.1 and later.
+For Redmine versions below 5.1, please use redmine_wiki_encryptor v0.0.5 
 
 ## Installation
 

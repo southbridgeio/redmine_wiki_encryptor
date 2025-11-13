@@ -1,2 +1,2 @@
-gem 'attr_encrypted', '~> 3.1'
+gem 'attr_encrypted', '~> 4.2'
 gem 'responders'

@@ -2,9 +2,11 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   name 'Redmine Wiki Encryptor plugin'
   author 'Pavel Nemkin'
   description 'Plugin encrypts wiki content in database'
-  version '0.0.5'
+  version '0.1.0'
   url 'https://github.com/southbridgeio/redmine_wiki_encryptor'
   author_url 'https://southbridge.io'
+
+  requires_redmine version_or_higher: '5.1'
 
   Redmine::AccessControl.map do |map|
     map.project_module :wiki do |map|
@@ -13,14 +15,7 @@ Redmine::Plugin.register :redmine_wiki_encryptor do
   end
 end
 
-register_after_redmine_initialize_proc =
-  if Redmine::VERSION::MAJOR >= 5
-    Rails.application.config.public_method(:after_initialize)
-  else
-    reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
-    reloader.public_method(:to_prepare)
-  end
-register_after_redmine_initialize_proc.call do
+Rails.application.config.after_initialize do
   require File.dirname(__FILE__) + '/lib/wiki_encryptor'
   require File.dirname(__FILE__) + '/lib/redmine_wiki_encryptor/hooks.rb'
   require_dependency File.dirname(__FILE__) + '/lib/wiki_content_patch'

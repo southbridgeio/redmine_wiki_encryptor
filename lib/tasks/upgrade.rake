@@ -1,6 +1,6 @@
 namespace :wiki_encryptor do
   task upgrade: :environment do
-    class LegacyWikiContent < ActiveRecord::Base
+    class LegacyWikiContent < ApplicationRecord
       self.table_name = WikiContent.table_name
 
       def self.key
@@ -22,7 +22,7 @@ namespace :wiki_encryptor do
       has_many :versions, class_name: 'LegacyWikiContentVersion', foreign_key: :wiki_content_id
     end
 
-    class LegacyWikiContentVersion < ActiveRecord::Base
+    class LegacyWikiContentVersion < ApplicationRecord
       self.table_name = WikiContentVersion.table_name
 
       def text
