@@ -8,7 +8,6 @@ module WikiPagePatch
     end
     base.class_eval do
       # Same as typing in the class.
-      unloadable # Send unloadable so it will not be unloaded in development.
       safe_attributes 'not_index'
     end
   end
